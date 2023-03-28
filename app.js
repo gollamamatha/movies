@@ -29,7 +29,7 @@ initialize();
 //get
 
 app.get("/movies/", async (request, response) => {
-  const movieDetails = `SELECT movie_name FROM Movie;`;
+  const movieDetails = `SELECT movie_name FROM Movie ;`;
   const movie = await db.all(movieDetails);
   response.send(movie);
 });
@@ -80,7 +80,7 @@ app.delete("/movies/:movieId/", async (request, response) => {
   const { movieId } = request.params;
   const getDelete = `DELETE FROM Movie WHERE movie_id=${movieId};`;
   await db.run(getDelete);
-  response.send("Movie Details Updated");
+  response.send("Movie Removed");
 });
 
 //get directors
@@ -111,3 +111,4 @@ app.get("/directors/:directorId/movies/,", async (request, response) => {
   const booksArray = await db.all(getDirectorQuery);
   response.send(booksArray);
 });
+module.exports = app;
